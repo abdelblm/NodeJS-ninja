@@ -94,8 +94,9 @@ app.get('/about', (req, res) => {
 //   res.redirect('/about');
 // });
 
+
 // blog routes
-app.use('/blogs', blogRoutes);
+app.use()
 
 //  404 PAGE =======>>>  SHOUL BE ON THE BOTTOM
 app.use((req, res) => {

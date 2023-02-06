@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const blogRoutes = require('./routes/blogRoutes');
+const Blog = require('./models/blog');
 
 //EXPRESS APP
 const app = express();
@@ -88,14 +88,62 @@ app.get('/about', (req, res) => {
   //   res.sendFile('./views/about.html', { root: __dirname });
   res.render('about', { title: 'About' });
 });
+// blog routes
+
+app.get('/blogs/create', (req, res) => {
+  res.render('create', { title: 'Create a new blog ' });
+});
+
+
+app.get('/blogs', (req, res) => {
+  Blog.find()
+    .sort({ createdAt: -1 })
+    .then((result) => {
+      res.render('index', { title: 'All blogs', blogs: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+//POST
+app.post('/blogs', (req, res) => {
+  const blog = new Blog(req.body);
+  blog
+    .save()
+    .then((result) => {
+      res.redirect('/blogs');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.get('/blogs/:id', (req, res) => {
+  const id = req.params.id;
+  Blog.findById(id)
+    .then((result) => {
+      res.render('details', { blog: result, title: 'Blog Details' });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+//DELETE
+app.delete('/blogs/:id', (req, res) => {
+  const id = req.params.id;
+  Blog.findByIdAndDelete(id)
+    .then((result) => {
+      res.json({ redirect: '/blogs' });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 //REDIRECT
 // app.get('/about-us', (req, res) => {
 //   res.redirect('/about');
 // });
-
-// blog routes
-app.use('/blogs', blogRoutes);
 
 //  404 PAGE =======>>>  SHOUL BE ON THE BOTTOM
 app.use((req, res) => {

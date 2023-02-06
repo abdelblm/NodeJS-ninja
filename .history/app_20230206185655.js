@@ -1,8 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const blogRoutes = require('./routes/blogRoutes');
-
+const blogRoutes =require()
 //EXPRESS APP
 const app = express();
 
@@ -89,13 +88,11 @@ app.get('/about', (req, res) => {
   res.render('about', { title: 'About' });
 });
 
+
 //REDIRECT
 // app.get('/about-us', (req, res) => {
 //   res.redirect('/about');
 // });
-
-// blog routes
-app.use('/blogs', blogRoutes);
 
 //  404 PAGE =======>>>  SHOUL BE ON THE BOTTOM
 app.use((req, res) => {
