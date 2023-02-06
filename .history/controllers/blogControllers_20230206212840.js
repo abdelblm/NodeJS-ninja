@@ -1,6 +1,7 @@
 // blog_index, blog_details, blog_create_get, blog_create_post, blog_delete
 const Blog = require('../models/blog');
 
+
 const blog_index = (req, res) => {
   Blog.find()
     .sort({ createdAt: -1 })
@@ -19,8 +20,7 @@ const blog_details = (req, res) => {
       res.render('blogs/details', { blog: result, title: 'Blog Details' });
     })
     .catch((err) => {
-      res.status(404).render('404', { title: 'Blog Not Found' });
-    });
+res.status(404).render('404', { title: '404' });    });
 };
 
 const blog_create_get = (req, res) => {
