@@ -8,7 +8,7 @@ const app = express();
 
 //Connect to mongodb
 const dbURI =
-  'mongodb+srv://abdelaziz:jaysean@ninjatuts.yyf7blx.mongodb.net/ninja-tuts?retryWrites=true&w=majority';
+  '';
 
 mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
