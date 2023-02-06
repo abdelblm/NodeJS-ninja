@@ -1,1 +1,0 @@
-// blog_index, blog_detailes, blog_create_get, blog_create_post, blog_delete
